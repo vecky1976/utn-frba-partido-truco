@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:uml2tools.notation="http://www.eclipse.org/mdt/uml2tools/gmf/notation/ext/2008" xmi:id="_btvV0KCxEd65Ec6k-uJv4A" type="UMLUseCase" name="caso uso.umlusc" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_dMPUIKCxEd65Ec6k-uJv4A" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_dMP7MKCxEd65Ec6k-uJv4A" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_dMP7MaCxEd65Ec6k-uJv4A" type="5016"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dMP7MqCxEd65Ec6k-uJv4A" type="7001" collapsed="true">
+      <children xmi:type="notation:Node" xmi:id="_H7y7sKC5Ed65Ec6k-uJv4A" type="3001">
+        <element xmi:type="uml:ElementImport" href="caso uso.uml#_H7ojoKC5Ed65Ec6k-uJv4A"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_H7y7saC5Ed65Ec6k-uJv4A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IFPyoKC5Ed65Ec6k-uJv4A" type="3001">
+        <element xmi:type="uml:ElementImport" href="caso uso.uml#_IFPLkKC5Ed65Ec6k-uJv4A"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IFPyoaC5Ed65Ec6k-uJv4A"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dMP7M6CxEd65Ec6k-uJv4A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dMP7NKCxEd65Ec6k-uJv4A"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_dMP7NaCxEd65Ec6k-uJv4A"/>
+    </children>
+    <element xmi:type="uml:Package" href="caso uso.uml#_bpcrsaCxEd65Ec6k-uJv4A"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dMPUIaCxEd65Ec6k-uJv4A"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_btvV0aCxEd65Ec6k-uJv4A"/>
+  <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_btvV0qCxEd65Ec6k-uJv4A"/>
+  <element xmi:type="uml:Package" href="caso uso.uml#_bpcrsaCxEd65Ec6k-uJv4A"/>
+</notation:Diagram>
