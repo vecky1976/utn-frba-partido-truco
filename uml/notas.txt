@@ -1,0 +1,12 @@
+- un jugador solicita crear partido
+- un jugador se registra en un partido -->(trucolistener)
+- otro jugador es registrado (o se registra) en un partido -->(oponente)
+- comenzar una partida
+	- Mientras no haya ganador
+		- Mezclar el mazo
+		- Repartir Cartas <-- (j1,j2,mazo)
+		- Jugar una mano (una mano tiene maximo 3 jugadas por jugador)
+		- Informar Resultado de Mano --> (resultado)
+		- Anotar Puntos --> (Truco controller)
+	
+		
