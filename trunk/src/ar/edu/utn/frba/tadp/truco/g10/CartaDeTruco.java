@@ -14,7 +14,6 @@ public class CartaDeTruco implements Carta {
 	}
 	
 	public Palo getPalo() {
-		// TODO Auto-generated method stub
 		return this.palo;
 	}
 
