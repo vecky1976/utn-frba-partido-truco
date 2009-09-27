@@ -154,6 +154,11 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 		
 	}
 
+	/** un jugador canta su envido
+	 *  validar que no pueda mentir cuando canta.
+	 *  Crear excepcion
+	 */
+	
 	public void valorEnvido(Integer puntos) {
 		// TODO Auto-generated method stub
 		
