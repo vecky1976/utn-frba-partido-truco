@@ -9,11 +9,10 @@ public class CartaDeTruco implements Carta {
 	private int numero;
 
 	public CartaDeTruco (Palo unPalo, int unNumero){
-		this.setNumero(numero);
+		this.setNumero(unNumero);
 		this.setPalo(palo);
 	}
 	
-	@Override
 	public Palo getPalo() {
 		// TODO Auto-generated method stub
 		return this.palo;
@@ -22,14 +21,13 @@ public class CartaDeTruco implements Carta {
 	public void setPalo(Palo palo) {
 		this.palo = palo;
 	}
-	
-	@Override
-	public int getNumero() {
-		// TODO Auto-generated method stub
-		return this.numero;
-	}
-	
+
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
+
+	public int getNumero() {
+		return numero;
+	}
+
 }
