@@ -27,7 +27,7 @@ public class TestRepartirTresCartas {
 	@Test
 	public void seRepartieronTresCartas(){
 		//p.repartirCartas();
-		assert((j1.getCantidadCartas()== 3 )&& (j2.getCantidadCartas() == 3) );
+		assert((j1.getCantidadCartas() == 3 )&& (j2.getCantidadCartas() == 3) );
 		
 	}
 
