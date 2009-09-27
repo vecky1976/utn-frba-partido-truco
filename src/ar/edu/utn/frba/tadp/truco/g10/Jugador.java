@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.tadp.truco.g10;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import ar.edu.utn.frba.tadp.truco.*;
@@ -7,14 +8,16 @@ import ar.edu.utn.frba.tadp.truco.*;
 public class Jugador implements  TrucoListener, ContrincanteTruco{
 	
 	private String nombre;
+	private Collection<Carta> cartas = new ArrayList<Carta>();
 
 	public Jugador(String nombre) {
 		this.setNombre(nombre);
-		
 	}
 
+	// se aceptan cartas cuando se reparte una mano
 	public void aceptarCartas(Collection<Carta> cartas) {
 		// TODO Auto-generated method stub
+		this.cartas = cartas;
 		
 	}
 
