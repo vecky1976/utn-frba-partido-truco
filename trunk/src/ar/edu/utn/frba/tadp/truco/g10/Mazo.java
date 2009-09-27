@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.tadp.truco.g10;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 import ar.edu.utn.frba.tadp.truco.Carta;
@@ -25,7 +26,6 @@ public class Mazo {
 	}
 
 	public CartaDeTruco repartirUnaCarta() {
-
 		Collections.shuffle(cartas);
 		return cartas.get(1);
 	}
@@ -36,6 +36,10 @@ public class Mazo {
 			tresCartas.add(this.repartirUnaCarta());
 		}
 		return tresCartas;
+	}
+
+	public void devolverCartas(Collection<CartaDeTruco> manoDelJugador) {
+		cartas.addAll(manoDelJugador);
 	}
 
 }
