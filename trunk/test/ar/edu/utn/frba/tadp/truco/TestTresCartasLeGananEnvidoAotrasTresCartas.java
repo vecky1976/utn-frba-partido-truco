@@ -8,8 +8,10 @@ import org.junit.Test;
 
 import ar.edu.utn.frba.tadp.truco.g10.CartaDeTruco;
 import ar.edu.utn.frba.tadp.truco.g10.Envido;
+import ar.edu.utn.frba.tadp.truco.g10.ResultadoEnvido;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author matias
@@ -18,11 +20,9 @@ import java.util.ArrayList;
  *
  */
 public class TestTresCartasLeGananEnvidoAotrasTresCartas {
-	private Palo BASTO;
-	private Palo ESPADA;
 	private CartaDeTruco c1, c2, c3, c4, c5, c6;
-	private ArrayList<CartaDeTruco> tresCartas;
-	private ArrayList<CartaDeTruco> otrasTresCartas;
+	private Collection<Carta> tresCartasCon20DeEnvido;
+	private Collection<Carta> tresCartasCon27DeEnvido;
 	private Envido envido;
 	
 	/**
@@ -30,43 +30,49 @@ public class TestTresCartasLeGananEnvidoAotrasTresCartas {
 	 */
 	@Before
 	public void setUp() throws Exception {
-	
+		
+		this.envido = new Envido();
+		
+		tresCartasCon20DeEnvido = new ArrayList<Carta>();
+		tresCartasCon27DeEnvido = new ArrayList<Carta>();
 		// crear tres cartas con envido = 20 (2 figuras)
-		c1 = new CartaDeTruco(BASTO, 10);
-		c2 = new CartaDeTruco(BASTO, 11);
-		c3 = new CartaDeTruco(ESPADA, 1);
+		c1 = new CartaDeTruco(Palo.BASTO, 10);
+		c2 = new CartaDeTruco(Palo.BASTO, 11);
+		c3 = new CartaDeTruco(Palo.ESPADA, 1);
 		
 		// crear tres cartas con envido = 27 (7 y figura)
-		c4 = new CartaDeTruco(ESPADA, 7);
-		c5 = new CartaDeTruco(ESPADA, 11);
-		c6 = new CartaDeTruco(BASTO, 2);
+		c4 = new CartaDeTruco(Palo.ESPADA, 7);
+		c5 = new CartaDeTruco(Palo.ESPADA, 11);
+		c6 = new CartaDeTruco(Palo.BASTO, 2);
 		
-		tresCartas = new ArrayList<CartaDeTruco>();
-		otrasTresCartas = new ArrayList<CartaDeTruco>();
-		
-		// crear conjunto de tres cartas con envido
-		tresCartas.add(c1);
-		tresCartas.add(c2);
-		tresCartas.add(c3);
+
 		
 		// crear conjunto de tres cartas con envido
-		otrasTresCartas.add(c4);
-		otrasTresCartas.add(c5);
-		otrasTresCartas.add(c6);
+		tresCartasCon20DeEnvido.add(c1);
+		tresCartasCon20DeEnvido.add(c2);
+		tresCartasCon20DeEnvido.add(c3);
 		
-		envido = new Envido();
-	}
-	
-	@Test
-	public void testNoGanaEnvido(){
-		// 20 de basto pierde contra 27 de espada
-		assertFalse(envido.ganaEnvido(tresCartas, otrasTresCartas));
+		// crear conjunto de tres cartas con envido
+		tresCartasCon27DeEnvido.add(c4);
+		tresCartasCon27DeEnvido.add(c5);
+		tresCartasCon27DeEnvido.add(c6);
 	}
 	
 	@Test
 	public void testGanaEnvido(){
 		// 27 de espada le ganan a 20 de basto
-		assertTrue(envido.ganaEnvido(otrasTresCartas, tresCartas));
+		assertTrue(envido.ganaEnvido(tresCartasCon27DeEnvido, tresCartasCon20DeEnvido)==ResultadoEnvido.GANA);
+	}
+	
+	@Test
+	public void testPierdeEnvido(){
+		// 20 de basto pierden contra 27 de espada
+		assertTrue(envido.ganaEnvido(tresCartasCon20DeEnvido, tresCartasCon27DeEnvido)==ResultadoEnvido.PIERDE);
 	}
 
+	@Test
+	public void testEmpataEnvido(){
+		// 20 de basto pierden contra 27 de espada
+		assertTrue(envido.ganaEnvido(tresCartasCon20DeEnvido, tresCartasCon20DeEnvido)==ResultadoEnvido.EMPATA);
+	}
 }
