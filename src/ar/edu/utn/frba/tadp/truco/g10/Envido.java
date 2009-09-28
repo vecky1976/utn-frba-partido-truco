@@ -22,6 +22,38 @@ public class Envido {
 		
 	}
 	
+
+	/**
+	 * nota: tener en cuenta que pueden empatar y gana el jugador mano
+	 * @param tresCartas
+	 * @param otrasTresCartas
+	 * @return GANA si las primeras le ganan a las segundas
+	 * 			EMAPATA si son pardas: mismo valor de envido
+	 * 			PIERDE si las segundas le ganan a las primeras
+	 */
+	public ResultadoEnvido ganaEnvido(	Collection<Carta> tresCartas,
+								Collection<Carta> otrasTresCartas ){
+		if (this.getValorEnvido(tresCartas) > this.getValorEnvido(otrasTresCartas))
+			return ResultadoEnvido.GANA;
+		if (this.getValorEnvido(tresCartas) < this.getValorEnvido(otrasTresCartas))
+			return ResultadoEnvido.PIERDE;
+		
+		return ResultadoEnvido.EMPATA;
+		
+	}
+	
+	// - si no tiene 2 del mismo palo el valor envido es la carta de mayor numero
+	// - si tiene envido sumo las 2 mayores del mismo palo
+	public int getValorEnvido(Collection<Carta> cartasDeUnaMano) {
+		Collection<Carta> mayoresCartas = new ArrayList<Carta>();
+		
+		if (this.tieneEnvido(cartasDeUnaMano)){
+			mayoresCartas = this.getDosMayoresMismoPalo(cartasDeUnaMano);
+			return this.calcularEnvido(((ArrayList<Carta>) mayoresCartas).get(0), ((ArrayList<Carta>) mayoresCartas).get(1));
+		}
+		return this.getMayorValorEnvidoCarta(cartasDeUnaMano);
+	}
+	
 	// verificar si al menos dos cartas de tres son del mismo palo
 	private boolean tieneEnvido(Collection<Carta> cartasDeUnaMano){
 		
@@ -65,38 +97,6 @@ public class Envido {
 			}
 		}
 	}
-
-	/**
-	 * nota: tener en cuenta que pueden empatar y gana el jugador mano
-	 * @param tresCartas
-	 * @param otrasTresCartas
-	 * @return GANA si las primeras le ganan a las segundas
-	 * 			EMAPATA si son pardas: mismo valor de envido
-	 * 			PIERDE si las segundas le ganan a las primeras
-	 */
-	public ResultadoEnvido ganaEnvido(	Collection<Carta> tresCartas,
-								Collection<Carta> otrasTresCartas ){
-		if (this.getValorEnvido(tresCartas) > this.getValorEnvido(otrasTresCartas))
-			return ResultadoEnvido.GANA;
-		if (this.getValorEnvido(tresCartas) < this.getValorEnvido(otrasTresCartas))
-			return ResultadoEnvido.PIERDE;
-		
-		return ResultadoEnvido.EMPATA;
-		
-	}
-	
-	// deberia pasarle 3 cartas y que considere:
-	// - si no tiene 2 del mismo palo el valor envido es la carta de mayor numero
-	// - si tiene envido sumo las 2 mayores del mismo palo
-	public int getValorEnvido(Collection<Carta> cartasDeUnaMano) {
-		Collection<Carta> mayoresCartas = new ArrayList<Carta>();
-		
-		if (this.tieneEnvido(cartasDeUnaMano)){
-			mayoresCartas = this.getDosMayoresMismoPalo(cartasDeUnaMano);
-			return this.calcularEnvido(((ArrayList<Carta>) mayoresCartas).get(0), ((ArrayList<Carta>) mayoresCartas).get(1));
-		}
-		return this.getMayorValorEnvidoCarta(cartasDeUnaMano);
-	}
 	
 	private int getMayorValorEnvidoCarta(Collection<Carta> tresCartas) {
 		int mayorValorEnvido = -1;
@@ -108,12 +108,22 @@ public class Envido {
 		}
 		return mayorValorEnvido;
 	}
+	
+	private int getMenorValorEnvidoCarta(Collection<Carta> tresCartas) {
+		int menorValorEnvido = 20; // no existe este valor de carta de envido
+		
+		for (Carta carta : tresCartas) {
+			if (this.getValorEnvidoCarta(carta.getNumero()) < menorValorEnvido){
+				menorValorEnvido = this.getValorEnvidoCarta(carta.getNumero());
+			}
+		}
+		return menorValorEnvido;
+	}
 
 	private Collection<Carta> getDosMayoresMismoPalo(
 			Collection<Carta> tresCartas) {
 		
 		this.clasificarPorPalo(tresCartas);
-		
 		
 		// si son 2 elementos -> retorno esos
 		if (this.cartasOro.size()==2)
@@ -126,7 +136,6 @@ public class Envido {
 			return this.cartasEspada;
 		
 		// si son 3 del mismo palo -> retorno las 2 de mayorValorEnvido
-		// sacar 
 		if (this.cartasOro.size()==3) {
 			this.removeCartaMenorValorEnvido(this.cartasOro);
 			return this.cartasOro;
@@ -149,14 +158,7 @@ public class Envido {
 	private void removeCartaMenorValorEnvido(Collection<Carta> cartasDeUnaMano){
 		
 		Iterator<Carta> it = cartasDeUnaMano.iterator();
-		int menorValorEnvido = 20; // no existe este valor de carta de envido
-		
-		
-		for (Carta carta : cartasDeUnaMano) {
-			if (this.getValorEnvidoCarta(carta.getNumero()) < menorValorEnvido){
-				menorValorEnvido = this.getValorEnvidoCarta(carta.getNumero());
-			}
-		}
+		int menorValorEnvido = this.getMenorValorEnvidoCarta(cartasDeUnaMano);
 		
 		while(it.hasNext()) 
 		{
@@ -164,7 +166,6 @@ public class Envido {
 			if(this.getValorEnvidoCarta(c.getNumero()) == menorValorEnvido) 
 				it.remove();
 		}
-		
 	}
 
 	// si es figura vale cero, entro caso el numero de la carta
