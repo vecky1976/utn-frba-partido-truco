@@ -2,6 +2,7 @@ package ar.edu.utn.frba.tadp.truco.g10;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import ar.edu.utn.frba.tadp.truco.Carta;
 
@@ -12,49 +13,75 @@ import ar.edu.utn.frba.tadp.truco.Carta;
  */
 public class Envido {
 	
+	private Collection<Carta> cartasOro = new ArrayList<Carta>();
+	private Collection<Carta> cartasCopa = new ArrayList<Carta>();
+	private Collection<Carta> cartasEspada = new ArrayList<Carta>();
+	private Collection<Carta> cartasBasto = new ArrayList<Carta>();
+	
 	public Envido () {
 		
 	}
 	
 	// verificar si al menos dos cartas de tres son del mismo palo
-	public boolean tieneEnvido(Collection<Carta> cartasDeUnaMano){
-		Collection<Carta> cartasOro = new ArrayList<Carta>();
-		Collection<Carta> cartasCopa = new ArrayList<Carta>();
-		Collection<Carta> cartasEspada = new ArrayList<Carta>();
-		Collection<Carta> cartasBasto = new ArrayList<Carta>();
-		// filtrar sub colecciones por mismo palo
-		for (Carta unaCarta : cartasDeUnaMano){
-			switch (unaCarta.getPalo())
-			{
-			case ORO: cartasOro.add(unaCarta); break;
-			case ESPADA: cartasEspada.add(unaCarta); break;
-			case BASTO: cartasBasto.add(unaCarta); break;
-			case COPA: cartasCopa.add(unaCarta); break;
-			}
-		}
+	private boolean tieneEnvido(Collection<Carta> cartasDeUnaMano){
+		
+		this.clasificarPorPalo(cartasDeUnaMano);
+
 		// si cualquier coleccion del mismo palo tiene
 		// dos o mas cartas tiene envido
-		if (	(cartasOro.size()> 1) ||
-				(cartasEspada.size()> 1) ||
-				(cartasBasto.size()> 1) ||
-				(cartasCopa.size()> 1)
+		if (	this.anyPaloColectionHasMoreThan(1)
 			)
 			return true;
 		else
 			return false;
 	}
 	
+	private boolean anyPaloColectionHasMoreThan(int i) {
+		if ((this.cartasOro.size()> i) ||
+				(this.cartasEspada.size()> i) ||
+				(this.cartasBasto.size()> i) ||
+				(this.cartasCopa.size()> i)
+			)
+			return true;
+		else
+			return false;
+	}
+
+	private void clasificarPorPalo(Collection<Carta> cartasDeUnaMano) {
+		// TODO Auto-generated method stub
+		this.cartasOro = new ArrayList<Carta>();
+		this.cartasCopa = new ArrayList<Carta>();
+		this.cartasEspada = new ArrayList<Carta>();
+		this.cartasBasto = new ArrayList<Carta>();
+		
+		// filtrar sub colecciones por mismo palo
+		for (Carta unaCarta : cartasDeUnaMano){
+			switch (unaCarta.getPalo())
+			{
+			case ORO: this.cartasOro.add(unaCarta); break;
+			case ESPADA: this.cartasEspada.add(unaCarta); break;
+			case BASTO: this.cartasBasto.add(unaCarta); break;
+			case COPA: this.cartasCopa.add(unaCarta); break;
+			}
+		}
+	}
+
 	/**
-	 * dados dos conjuntos de cartas, devuelve true si las primeras
-	 * le ganan envido a las segundas, caso contrario false
 	 * nota: tener en cuenta que pueden empatar y gana el jugador mano
 	 * @param tresCartas
 	 * @param otrasTresCartas
-	 * @return
+	 * @return GANA si las primeras le ganan a las segundas
+	 * 			EMAPATA si son pardas: mismo valor de envido
+	 * 			PIERDE si las segundas le ganan a las primeras
 	 */
-	public boolean ganaEnvido(	Collection<Carta> tresCartas,
+	public ResultadoEnvido ganaEnvido(	Collection<Carta> tresCartas,
 								Collection<Carta> otrasTresCartas ){
-		return this.getValorEnvido(tresCartas) > this.getValorEnvido(otrasTresCartas);
+		if (this.getValorEnvido(tresCartas) > this.getValorEnvido(otrasTresCartas))
+			return ResultadoEnvido.GANA;
+		if (this.getValorEnvido(tresCartas) < this.getValorEnvido(otrasTresCartas))
+			return ResultadoEnvido.PIERDE;
+		
+		return ResultadoEnvido.EMPATA;
 		
 	}
 	
@@ -68,10 +95,10 @@ public class Envido {
 			mayoresCartas = this.getDosMayoresMismoPalo(cartasDeUnaMano);
 			return this.calcularEnvido(((ArrayList<Carta>) mayoresCartas).get(0), ((ArrayList<Carta>) mayoresCartas).get(1));
 		}
-		return this.getMayorValorCarta(cartasDeUnaMano);
+		return this.getMayorValorEnvidoCarta(cartasDeUnaMano);
 	}
 	
-	private int getMayorValorCarta(Collection<Carta> tresCartas) {
+	private int getMayorValorEnvidoCarta(Collection<Carta> tresCartas) {
 		int mayorValorEnvido = -1;
 		// TODO Auto-generated method stub
 		for (Carta carta : tresCartas) {
@@ -84,64 +111,60 @@ public class Envido {
 
 	private Collection<Carta> getDosMayoresMismoPalo(
 			Collection<Carta> tresCartas) {
-		// TODO Auto-generated method stub
-		Collection<Carta> cartasOro = new ArrayList<Carta>();
-		Collection<Carta> cartasCopa = new ArrayList<Carta>();
-		Collection<Carta> cartasEspada = new ArrayList<Carta>();
-		Collection<Carta> cartasBasto = new ArrayList<Carta>();
-		// filtrar sub coleccion por mismo palo
-		for (Carta unaCarta : tresCartas){
-			switch (unaCarta.getPalo())
-			{
-			case ORO: cartasOro.add(unaCarta);
-			case ESPADA: cartasEspada.add(unaCarta);
-			case BASTO: cartasBasto.add(unaCarta);
-			case COPA: cartasCopa.add(unaCarta);
-			}
-		}
+		
+		this.clasificarPorPalo(tresCartas);
+		
 		
 		// si son 2 elementos -> retorno esos
-		if (cartasOro.size()==2)
-			return cartasOro;
-		if (cartasCopa.size()==2)
-			return cartasCopa;
-		if (cartasBasto.size()==2)
-			return cartasBasto;
-		if (cartasEspada.size()==2)
-			return cartasEspada;
+		if (this.cartasOro.size()==2)
+			return this.cartasOro;
+		if (this.cartasCopa.size()==2)
+			return this.cartasCopa;
+		if (this.cartasBasto.size()==2)
+			return this.cartasBasto;
+		if (this.cartasEspada.size()==2)
+			return this.cartasEspada;
 		
 		// si son 3 del mismo palo -> retorno las 2 de mayorValorEnvido
-		if (cartasOro.size()==3) {
-			// no va a funcionar por estoy sacando otro objeto que no esta en la coleccion
-			cartasOro.remove(this.getCartaMenorValorEnvido(cartasOro));
-			return cartasOro;
+		// sacar 
+		if (this.cartasOro.size()==3) {
+			this.removeCartaMenorValorEnvido(this.cartasOro);
+			return this.cartasOro;
 		}
-		if (cartasCopa.size()==3){
-			cartasCopa.remove(this.getCartaMenorValorEnvido(cartasCopa));
-			return cartasCopa;
+		if (this.cartasCopa.size()==3){
+			this.removeCartaMenorValorEnvido(this.cartasCopa);
+			return this.cartasCopa;
 		}
-		if (cartasBasto.size()==3){
-			cartasBasto.remove(this.getCartaMenorValorEnvido(cartasBasto));
-			return cartasBasto;
+		if (this.cartasBasto.size()==3){
+			this.removeCartaMenorValorEnvido(this.cartasBasto);
+			return this.cartasBasto;
 		}
-		if (cartasEspada.size()==3){
-			cartasEspada.remove(this.getCartaMenorValorEnvido(cartasEspada));
-			return cartasEspada;
+		if (this.cartasEspada.size()==3){
+			this.removeCartaMenorValorEnvido(this.cartasEspada);
+			return this.cartasEspada;
 		}
 		return null;// no deveria llegar aca, excepcion
 	}
 
-	private Carta getCartaMenorValorEnvido(Collection<Carta> cartasDeUnaMano) {
-		Carta unaCarta = null;
+	private void removeCartaMenorValorEnvido(Collection<Carta> cartasDeUnaMano){
+		
+		Iterator<Carta> it = cartasDeUnaMano.iterator();
 		int menorValorEnvido = 20; // no existe este valor de carta de envido
-		// TODO Auto-generated method stub
+		
+		
 		for (Carta carta : cartasDeUnaMano) {
 			if (this.getValorEnvidoCarta(carta.getNumero()) < menorValorEnvido){
 				menorValorEnvido = this.getValorEnvidoCarta(carta.getNumero());
-				unaCarta = new CartaDeTruco(carta.getPalo(), carta.getNumero());
 			}
 		}
-		return unaCarta;
+		
+		while(it.hasNext()) 
+		{
+			Carta c = it.next();
+			if(this.getValorEnvidoCarta(c.getNumero()) == menorValorEnvido) 
+				it.remove();
+		}
+		
 	}
 
 	// si es figura vale cero, entro caso el numero de la carta
@@ -157,7 +180,7 @@ public class Envido {
 		}
 	}
 	
-	public int calcularEnvido(Carta unaCarta, Carta otraCarta){
+	private int calcularEnvido(Carta unaCarta, Carta otraCarta){
 		return this.getValorEnvidoCarta(unaCarta.getNumero()) + 
 				this.getValorEnvidoCarta(otraCarta.getNumero()) + 20;
 	}
