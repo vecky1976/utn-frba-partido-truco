@@ -10,7 +10,7 @@ public class CartaDeTruco implements Carta {
 
 	public CartaDeTruco (Palo unPalo, int unNumero){
 		this.setNumero(unNumero);
-		this.setPalo(palo);
+		this.setPalo(unPalo);
 	}
 	
 	public Palo getPalo() {
