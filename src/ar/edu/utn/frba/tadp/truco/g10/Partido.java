@@ -3,6 +3,8 @@ package ar.edu.utn.frba.tadp.truco.g10;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ar.edu.utn.frba.tadp.truco.Carta;
+
 /**
  * Clase Partido
  * 
@@ -46,11 +48,11 @@ public class Partido {
 		rondasDelPartido.add(rondaInicial);
 	}
 
-	public void devolverCartas(Collection<CartaDeTruco> mano) {
+	public void devolverCartas(Collection<Carta> mano) {
 		mazo.devolverCartas(mano);		
 	}
 
-	public void seVaAlMazo(Collection<CartaDeTruco> manoDelJugador,Jugador jugador) {
+	public void seVaAlMazo(Collection<Carta> manoDelJugador,Jugador jugador) {
 		mazo.devolverCartas(manoDelJugador);
 		getUltimaRonda().seVaAlMazo(jugador);
 	}
