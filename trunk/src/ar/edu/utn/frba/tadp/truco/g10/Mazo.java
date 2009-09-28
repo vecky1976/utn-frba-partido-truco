@@ -8,13 +8,13 @@ import ar.edu.utn.frba.tadp.truco.Carta;
 import ar.edu.utn.frba.tadp.truco.Palo;
 
 public class Mazo {
-	private ArrayList<CartaDeTruco> cartas;
+	private ArrayList<Carta> cartas;
 
 	
 	// Cuando se crea un mazo se van generando las 40 cartas con las que se
 	// juega en el Truco.
 	public Mazo() {
-		cartas = new ArrayList<CartaDeTruco>();
+		cartas = new ArrayList<Carta>();
 
 		for (Palo palo : Palo.values()) {
 			for (int numero = 0; numero <= 12; numero++) {
@@ -25,7 +25,7 @@ public class Mazo {
 		}
 	}
 
-	public CartaDeTruco repartirUnaCarta() {
+	public Carta repartirUnaCarta() {
 		Collections.shuffle(cartas);
 		return cartas.get(1);
 	}
@@ -38,7 +38,7 @@ public class Mazo {
 		return tresCartas;
 	}
 
-	public void devolverCartas(Collection<CartaDeTruco> manoDelJugador) {
+	public void devolverCartas(Collection<Carta> manoDelJugador) {
 		cartas.addAll(manoDelJugador);
 	}
 
