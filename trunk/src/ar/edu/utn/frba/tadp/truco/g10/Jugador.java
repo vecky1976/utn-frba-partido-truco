@@ -8,17 +8,16 @@ import ar.edu.utn.frba.tadp.truco.*;
 public class Jugador implements  TrucoListener, ContrincanteTruco{
 	
 	private String nombre;
-	private Collection<Carta> cartas = new ArrayList<Carta>();
+	private Collection<Carta> cartasEnMano = new ArrayList<Carta>();
+	private Partido partido;
 
 	public Jugador(String nombre) {
 		this.setNombre(nombre);
 	}
 
-	// se aceptan cartas cuando se reparte una mano
-	public void aceptarCartas(Collection<Carta> cartas) {
-		// TODO Auto-generated method stub
-		this.cartas = cartas;
-		
+	// Se aceptan cartas cuando se reparte una mano
+	public void aceptarCartas(Collection<Carta> cartasRecibidas) {
+		this.cartasEnMano = cartasRecibidas;
 	}
 
 	public void cantarValorEnvido(int valorReal) {
@@ -123,8 +122,7 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 	}
 
 	public void meVoyAlMazo() {
-		// TODO Auto-generated method stub
-		
+		partido.seVaAlMazo(this.cartasEnMano,this);
 	}
 
 	public void noQuiero() {
@@ -157,11 +155,7 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 		
 	}
 
-	/** un jugador canta su envido
-	 *  validar que no pueda mentir cuando canta.
-	 *  Crear excepcion
-	 */
-	
+	//TODO un jugador canta su envido, validar que no pueda mentir cuando canta. Crear excepcion
 	public void valorEnvido(Integer puntos) {
 		// TODO Auto-generated method stub
 		
@@ -176,8 +170,11 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 	}
 
 	public int getCantidadCartas() {
-		// TODO Auto-generated method stub
-		return 0;
+		return cartasEnMano.size();
+	}
+
+	public void entrarEnElPartido(Partido p) {
+		this.partido = p;		
 	}
 
 }
