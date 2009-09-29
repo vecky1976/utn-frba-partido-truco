@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Mano {
 
 	public Mano(Jugador jugador1, Jugador jugador2, Mazo mazo) {
+		this.manoEnCurso = true;
 		this.jugadorMano = jugador1;
 		this.jugadorResto = jugador2;
 		this.mazo = mazo;
@@ -16,6 +17,7 @@ public class Mano {
 	private Jugador jugadorResto;
 	private Mazo mazo;
 	private ArrayList<Ronda> rondasDeLaMano;
+	private boolean manoEnCurso;
 
 	public void jugarRondas() {
 		Ronda rondaEnCurso = new Ronda();
