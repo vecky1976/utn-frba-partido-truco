@@ -9,8 +9,8 @@ public class Ronda {
 	
 	public Ronda(){
 		rondaEnCurso = true;
-		Jugada primeraJugada = new Jugada();
-		jugadasDeLaRonda.add(primeraJugada);
+//		Jugada primeraJugada = new Jugada();
+//		jugadasDeLaRonda.add(primeraJugada);
 	}
 	
 	public boolean isTerminada(){

@@ -32,7 +32,8 @@ public class TestNoSeCantaTruco {
 	@Test
 	public void noSeCantoTruco(){
 		mano.prepararMano();
-//		mano.
+//		mano.iniciar
+
 				
 	}
 
