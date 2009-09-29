@@ -1,15 +1,13 @@
 package ar.edu.utn.frba.tadp.truco;
 
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.utn.frba.tadp.truco.g10.Jugador;
 import ar.edu.utn.frba.tadp.truco.g10.Mano;
 import ar.edu.utn.frba.tadp.truco.g10.Mazo;
-//import ar.edu.utn.frba.tadp.truco.g10.Partido;
+import ar.edu.utn.frba.tadp.truco.g10.Partido;
 
 public class TestNoSeCantaTruco {
 	
@@ -17,7 +15,7 @@ public class TestNoSeCantaTruco {
 	Jugador jugador2;
 	Mazo mazo;
 	Mano mano ;
-	//Partido partido;
+	Partido partido;
 	
 
 	@Before
@@ -26,15 +24,15 @@ public class TestNoSeCantaTruco {
 		jugador2= new Jugador ("Tito");
 		mazo = new Mazo();
 		mano = new Mano(jugador1,jugador2,mazo);
-		//partido  = new Partido(jugador1, jugador1, mazo);
+		partido  = new Partido(jugador1, jugador1, mazo);
+		
 		
 	}
 	
 	@Test
 	public void noSeCantoTruco(){
-		mano.jugarRonda();
-		//assertFalse(false);
-		//mano.seCantoTruco();
+		mano.prepararMano();
+//		mano.
 				
 	}
 

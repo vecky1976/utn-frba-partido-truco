@@ -12,14 +12,21 @@ public class Mano {
 	private Jugador jugadorResto;
 	private Mazo mazo;
 	
-	public void jugarRonda() {
+	public void jugarRondas() {
 		// TODO Auto-generated method stub
-		this.repartirCartas();
-				
-		
 		
 	}
+	/** Se prepara todo para que se puedan iniciar las rondas de la mano.
+	 * Se reparten 3 cartas a cada jugador.
+	 * 
+	 */
+	public void prepararMano(){
+		this.repartirCartas();
+	}
 
+	/** A cada uno de los jugadores de la mano se le reparten tres cartas.
+	 * 
+	 */
 	private void repartirCartas() {
 		// TODO Auto-generated method stub
 		this.jugadorMano.aceptarCartas(this.mazo.darTresCartas());
