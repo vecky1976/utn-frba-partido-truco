@@ -10,7 +10,8 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 	private String nombre;
 	private Collection<Carta> cartasEnMano = new ArrayList<Carta>();
 	private Partido partido;
-
+	private boolean canteTruco;
+	
 	public Jugador(String nombre) {
 		this.setNombre(nombre);
 	}
@@ -152,6 +153,7 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 
 	public void truco() {
 		// TODO Auto-generated method stub
+		this.canteTruco = true;
 		
 	}
 
@@ -175,6 +177,10 @@ public class Jugador implements  TrucoListener, ContrincanteTruco{
 
 	public void entrarEnElPartido(Partido p) {
 		this.partido = p;		
+	}
+
+	public boolean canteTruco() {
+		return this.canteTruco;
 	}
 
 }

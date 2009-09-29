@@ -45,6 +45,7 @@ public class Ronda {
 			// jugadorMano.juegaAlgo() -- Esto seria cualquier jguada posible
 			// dentro del truco (Truco, Envido, ReTruco, QuieroValeCuatro.... o
 			// jugar la carta)
+			this.terminarRonda();
 		}
 
 	}
