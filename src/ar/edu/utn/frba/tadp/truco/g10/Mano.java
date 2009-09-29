@@ -6,6 +6,7 @@ public class Mano {
 
 	public Mano(Jugador jugador1, Jugador jugador2, Mazo mazo) {
 		this.manoEnCurso = true;
+		this.alguienCantoTruco = false;
 		this.jugadorMano = jugador1;
 		this.jugadorResto = jugador2;
 		this.mazo = mazo;
@@ -18,6 +19,7 @@ public class Mano {
 	private Mazo mazo;
 	private ArrayList<Ronda> rondasDeLaMano;
 	private boolean manoEnCurso;
+	private boolean alguienCantoTruco;
 
 	public void jugarRondas() {
 		Ronda rondaEnCurso = new Ronda();
@@ -46,6 +48,14 @@ public class Mano {
 		this.jugadorMano.aceptarCartas(this.mazo.darTresCartas());
 		this.jugadorResto.aceptarCartas(this.mazo.darTresCartas());
 
+	}
+	public void seCantoTruco() {
+
+		this.alguienCantoTruco = true;
+	}
+	public boolean alguienCantoTruco() {
+		// TODO Auto-generated method stub
+		return this.alguienCantoTruco;
 	}
 
 }

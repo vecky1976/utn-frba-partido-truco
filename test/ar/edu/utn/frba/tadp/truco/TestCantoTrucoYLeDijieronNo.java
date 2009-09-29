@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.tadp.truco;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +28,7 @@ public class TestCantoTrucoYLeDijieronNo {
 	public void teCantoTruco(){
 		mano.prepararMano();
 		mano.jugarRondas();
-		assertTrue(mano.seCantoTruco());	
+		assertTrue(mano.alguienCantoTruco());	
 	}
 	
 
