@@ -42,4 +42,9 @@ public class Mazo {
 		cartas.addAll(manoDelJugador);
 	}
 
+	public int getCantidadDeCartasEnElMazo() {
+		return this.cartas.size();
+		
+	}
+
 }
